@@ -334,6 +334,12 @@ void InitGraphics()
     devcon->Map(pIBuffer, NULL, D3D11_MAP_WRITE_DISCARD, NULL, &ms);      // map the buffer
 	memcpy(ms.pData, &indices, sizeof(UINT) * 36);                     // copy the data
     devcon->Unmap(pIBuffer, NULL);
+
+    ID3D11ShaderResourceView* cubeMap;
+
+    HRESULT hr = D3DX11CreateShaderResourceViewFromFile(dev, L"mountains1024.dds", 0, 0, &cubeMap, 0 );
+
+    devcon->PSSetShaderResources(0, 1, &cubeMap);
 }
 
 
